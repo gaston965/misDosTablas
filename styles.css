@@ -1,0 +1,77 @@
+main{
+    height: 300vh;
+}
+
+
+.navbar{
+    width: 100%;
+    /* background-color: red; */
+}
+.navbar .container{
+    /* background-color: red; */
+    padding: 10px;
+}
+.navbar .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: red; */
+}
+.navbar .header .logo{
+    width: 250px;
+}
+.navbar .header .button{
+    width: 30px;
+    /* background-color: blue; */
+}
+.navbar .menu{
+    /* background-color: red; */
+}
+.navbar .menu .item{
+    margin: 15px 0;
+}
+.navbar .menu .item a{
+    color: #5c686a;
+    cursor: pointer;
+}
+
+/* Estilos para tamaño de pantalla de 768px en adelante */
+@media (min-width:768px) {
+    .navbar{
+        display: flex;
+        justify-content: center;
+        /* background-color: red; */
+        -webkit-box-shadow: 0px 5px 5px 0px rgba(194,183,194,1);
+        -moz-box-shadow: 0px 5px 5px 0px rgba(194,183,194,1);
+        box-shadow: 0px 5px 5px 0px rgba(194,183,194,1);
+        position: fixed;
+    }
+    .navbar .container{
+        /* background-color: cadetblue; */
+        width: 100%;
+        display: flex;
+        max-width: 1400px;
+        justify-content: space-between;
+        /* align-self: center; */
+    }
+
+    .navbar .menu{
+        display: flex;
+    }
+
+    .navbar .menu .item{
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        /* background-color: aquamarine; */
+        border-right: 1px solid #929395;
+    }
+    .navbar .menu .item:last-child{
+        border: none;
+    }
+}
+@media(min-width: 1024px){
+    .navbar .menu .item{
+        padding: 0 20px;
+    }
+}

@@ -1,0 +1,42 @@
+.logo {
+	padding: 7px;
+	background: white;
+	border-radius: .25rem;
+}
+
+.table .thead-dark th{
+	color: #fff;
+	background-color: #688;
+	border-color: #799;
+}
+
+a, a:hover{
+	color: #688;
+}
+
+.page-link, .page-link:hover{
+	color: #688;
+}
+
+.page-link:focus, input:focus{
+	border-color: #788;
+	outline: 0 0 0 0  !important;
+	box-shadow: 0 0 0 0 !important;
+}
+
+.page-item.active .page-link{
+	background-color: #688;
+	border-color: #788;
+}
+
+.form-control:focus{
+	border-color: #788;
+}
+
+.nav-link:hover, .nav-item.active{
+	background-color: #688;
+}
+
+.nav-item.active a, .nav-link:hover{
+	color: white;
+}

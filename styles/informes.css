@@ -1,0 +1,9 @@
+.informes{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn a{
+    text-decoration: none;
+    color: white;
+}

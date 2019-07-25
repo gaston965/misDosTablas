@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MAXELEC</title>
+        <title>Asistencia | Listado de Consultas</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="../css/asistencias.css">
+    <!--Fontawesome CDN-->
+    <script src="https://kit.fontawesome.com/b65080887d.js"></script>
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="asistencias.css">
+    <link rel="stylesheet" href="styles/nueva_asistencia.css">
+    <link rel="stylesheet" href="styles/informes.css">
+    <link rel="stylesheet" href="informes.css">
+    <link rel="stylesheet" href="styles.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.14/js/jquery.tablesorter.min.js"></script>
+     <!-- <script src="js/jquery-1.6.3.min.js"></script> -->
+     <script src="js/coso.js"></script>
+       <script src="js/busqueda.js"></script>
+</head>
+<body>
+
+    <div class="navbar" v-if="navbar">
+        <div class="container">
+          
+            <div class="header">
+                <img class="logo" src="./assets/navbar/logo.jpeg" alt="">
+                <img v-if="windowWidth<768" @click="mostrarMenu" class="button" src="./assets/navbar/menu.svg" alt="">
+            </div>
+           
+            <div class="menu" v-if="menu">
+                <router-link tag="div" class="item" v-for="item in items" exact :to='item.link'>
+                    <a>{{item.name}}</a>    
+                </router-link>
+            </div>
+        </div>
+    </div> 
+
+    <main>
+        <router-view></router-view>
+    </main>
+
+    <template id="login">
+        <div class="login" >
+            <div class="logo">
+                <img class="image" src="assets/login/logo.jpeg" >
+            </div>
+            <div class="input">
+                <img src="assets/login/user-solid.svg" >
+                <input type="text" placeholder="Username">
+            </div>
+            <div class="input">  
+                <img src="assets/login/lock-solid.svg">
+                <input type="password" placeholder="Password">
+            </div>
+            <div class="button" @click="login()">
+                <a>LOGIN</a>
+            </div>
+        </div>
+    </template>
+
+    <template id="nueva_asistencia">
+        <div class="nueva_asistencia main_container">
+            <div class="datos_cliente">
+                <label class="title">
+                    <b>Datos del Cliente:</b>
+                </label>
+                <div class="form-row">
+                    <label class="">Nombre y Apellido: </label>
+                    <input type="text" class="" value="">
+                </div>
+                <div class="form-row">
+                    <label class="">Teléfono: </label>
+                    <input type="text" class="" value="">
+                </div>
+                <div class="form-row">
+                    <label class="">Correo electrónico: </label>
+                    <input type="text" class="" value="">
+                </div>
+                <div class="form-row">
+                    <label class="">DNI: </label>
+                    <input type="text" class="" value="">
+                </div>
+                <div class="form-row">
+                    <label class="">Domicilio: </label>
+                    <input type="text" class="" value="">
+                </div>
+                <div class="form-row">
+                    <label class="">Ciudad: </label>
+                    <input type="text" class="" value="">
+                </div>
+                <div class="form-row">
+                    <label class="">Provincia: </label>
+                    <input type="text" class="" value="">
+                </div>
+                <div class="form-row">
+                    <label class="">Código Postal: </label>
+                    <input type="text" class="" value="">
+                </div>
+            </div>
+            <hr>
+            <div class="datos_producto">
+                <div class="title">
+                    <label class=""><b>Datos del Producto:</b></label>
+                </div>
+                <div class="form-row">
+                    <label>Tipo de Producto</label>
+                    <div>
+                        <select v-model="producto">
+                            <option value="Termotanque">Termotanque</option>
+                            <option value="Anafe">Anafe</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>Número de Producto</label>
+                    <input type="text" class="form-control" value="" placeholder="Buscar producto..." v-model="modelo">
+                </div>
+            </div>
+            <hr>
+            <div class="asesoria" v-if="producto && modelo">
+                <h5 class="title">Pasos a seguir:</h5>
+                <h6 class="sub_title">Problemas comunes de {{producto}} {{modelo}}</h6>
+                <div class="soluciones">
+                    <ol>
+                        <li>1. Preguntar si se encuentra enchufado.</li>
+                        <li>2. Comprobar luz led de encendido.</li>
+                        <li>3. Comprobar ruidos internos.</li>
+                        <li>4. Preguntar estados de las llaves de paso.</li>
+                    </ol>
+                </div>
+                <div class="options">
+                    <a>Anterior</a>
+                    <a>Siguiente</a>
+                </div>
+            </div>
+            <div class="resultado" v-if="producto && modelo">
+                <div class="form-row">
+                    <label>¿Se llegó a una solución?</label>
+                    <div class="buttons">
+                        <button type="" class="btn" @click="asistenciaON()">Si</button>
+                        <button type="" class="btn" @click="reclamoON()">No</button>
+                    </div>
+                </div>  
+                <div class="form-row" v-if="band && asistencia">
+                    <label>Describir solución:</label>
+                    <div class="textarea">
+                        <textarea></textarea>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="datos_tecnico" v-if="band && reclamo">
+                <div class="title">
+                    <h4>Servicio Técnico cercano al cliente:</h4>
+                </div>
+                <div class="info">
+                    <div class="map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14155.090197682792!2d-58.93209349999999!3d-27.507448299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1561244531188!5m2!1ses-419!2sar" width="350" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                    <div class="datos">
+                        <div class="">                            
+                            <h5 class="title">Service NEA</h5>
+                            <h4 class="sub_title">Reparaciones de Termotanques</h4>
+                        </div>
+                        <div class="domicilio">
+                            <ul>
+                                <li> Av. 9 de Julio 569</li>
+                                <li> Teléfono: 0362-4404022</li>
+                                <li> 8:00hs a 12:00hs</li>
+                                <li> 17:00hs a 21:00hs</li>
+                            </ul>
+                        </div>
+                        <div class="options">
+                            <a>Anterior</a>
+                            <a>Siguiente</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="choose" v-if="band">
+                <button class="btn" v-if="asistencia" @click="goAsistencias()">Guardar Asistencia</button>
+                <button class="btn" v-if="reclamo" @click="goReclamos()">Generar Reclamo</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="asistencias" >
+       <div class="container mt-3" style="margin-top: 10% !important;">
+           
+        <form >
+                 <h1>Asistencias</h1>
+
+            <h3>Últimas Consultas</h3>
+
+            <div class="form-group">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-search"></i></div>
+                    </div>
+                    <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Buscar..."/>
+                </div>
+            </div>
+ 
+
+                <table id="myTable" class="table table-hover table-bordered table-striped">
+                    <thead class="thead-dark thead-max">
+                        <tr>
+                            <th scope="col">ID Asistencia</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Fecha de Creación</th>
+                            <th scope="col">Tipo de Comunicación</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><a href="detalleasistencia.html">001</a></td>
+                            <td>33333333</td>
+                            <td>2019-03-23</td>
+                            <td>Formulario Web</td>
+                            <td>Nueva consulta <a class="badge badge-secondary" href="detalleasistencia.html">Contestar</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">002</td>
+                            <td>35496962</td>
+                            <td>2019-03-30</td>
+                            <td>Llamada telefónica</td>
+                            <td>Derivado en reclamo <a href="">#218975</a></td>     <!-- Redirige a Detalle Reclamo -->
+                        </tr>
+                        <tr>
+                            <th scope="row">003</td>
+                            <td>37777777</td>
+                            <td>2019-04-02</td>
+                            <td>Formulario Web</td>
+                            <td>Nueva consulta <a class="badge badge-secondary" role="button" href="#">Contestar</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">004</td>
+                            <td>27272727</td>
+                            <td>2019-04-03</td>
+                            <td>Llamada telefónica</td>
+                            <td>Resuelto</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">005</td>
+                            <td>38833883</td>
+                            <td>2019-04-03</td>
+                            <td>Llamada telefónica</td>
+                            <td>Resuelto</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">006</td>
+                            <td>35813853</td>
+                            <td>2019-04-03</td>
+                            <td>Formulario Web</td>
+                            <td>Derivado en reclamo <a href="">#33091</a></td>     <!-- Redirige a Detalle Reclamo -->
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <footer><hr><center><p >Desarrollado por Grupo © Software 2019- Derechos Reservados</p></center></hr></footer>
+          </div>
+    </template>
+
+    <template id="informes">
+        <div class="main_container informes">
+            <div class="form-row">
+                <label>Seleccione año: </label>
+                <div>
+                    <select>
+                        <option v-for="year in years" value="">{{year}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <label>Seleccione periodo: </label>
+                <div>
+                    <select>
+                        <option v-for="periodo in meses">{{periodo}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <label>Seleccione tipo de Informe: </label>
+                <div>
+                    <select>
+                        <option v-for="informe in informes">{{informe}}</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn"><a href="assets/documentos/Informe de productos más reclamados y con mayor falla.pdf" target="_blank">Generar Informe</a></button>
+        </div>
+    </template>
+
+    <template id="reclamos">
+     <div class="container mt-3" style="margin-top: 10% !important;">
+             <h1>Asistencias</h1>
+
+            <h3>Últimas Consultas</h3>
+
+            <div class="form-group">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-search"></i></div>
+                    </div>
+                    <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Buscar..."/>
+                </div>
+            </div>
+ 
+
+
+    
+            <form action="">
+                <table id="myTable" class="table table-hover table-bordered table-striped">
+                   <thead class="thead-dark thead-max">
+                    <tr>
+                        <th scope="col">#ID Reclamo</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Fecha de alta</th>
+                        <th scope="col">Problema detectado</th>
+                        <th scope="col">Estado</th> <!-- (pendiente|en gestión|finalizado) -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="detallereclamo.html" target="_blank">218975</a></td>
+                        <td>Barrios Alicia</td>
+                        <td>35496962</td>
+                        <td>2019-03-30</td>
+                        <td>Termotanque no enciende</td>
+                        <td>Pendiente <a href="detallereclamo.html"></a></td>  <!-- Detalle Reclamo -->
+                    </tr>
+                    <tr>
+                        <td>218976</td>
+                        <td>Irma Garcia</td>
+                        <td>23165789</td>
+                        <td>2019-04-06</td>
+                        <td>Anafes no mantiene llama</td>
+                        <td>Pendiente</td>
+                    </tr>
+                    <tr>
+                        <td>215787</td>
+                        <td>Alicia Newman</td>
+                        <td>18025963</td>
+                        <td>2019-03-03</td>
+                        <td>Anafe abre llama muy grande</td>
+                        <td>En gestión</td>
+                    </tr>
+                    <tr>
+                        <td>218722</td>
+                        <td>Miss Bisman</td>
+                        <td>12156789</td>
+                        <td>2019-03-02</td>
+                        <td>Calefon no calienta</td>
+                        <td>Finalizado</td> 
+                    </tr>
+                    <tr>
+                        <td>215789</td>
+                        <td>Celina Edith</td>
+                        <td>45698789</td>
+                        <td>2019-02-20</td>
+                        <td>Calefon no hierve agua</td>
+                        <td>Finalizado</td>
+                    </tr>
+                 </tbody>   
+                </table>
+            </form>
+           <footer><hr><center><p >Desarrollado por Grupo © Software 2019- Derechos Reservados</p></center></hr></footer>
+        </div>
+
+      </div>
+    </template>
+
+    <!-- etiqueta necesaria para usar VUE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <!-- etiqueta que linkea el código vue que se utiliza para esta página -->
+    <script src="js/main.js"></script>
+    
+     
+</body>
+ 
+    
+</html>
