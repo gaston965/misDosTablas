@@ -28,8 +28,8 @@
 </head>
 <body>
 
-    <div class="navbar" v-if="navbar">
-        <div class="container">
+    <div class="navbar" v-if="navbar" >
+        <div class="container" >
           
             <div class="header">
                 <img class="logo" src="./assets/navbar/logo.jpeg" alt="">
@@ -196,20 +196,20 @@
     <template id="asistencias" >
        <div class="container mt-3" style="margin-top: 10% !important;">
            
-        <form >
-                 <h1>Asistencias</h1>
+                <form >
+                         <h1>Asistencias</h1>
 
-            <h3>Últimas Consultas</h3>
+                    <h3>Últimas Consultas</h3>
 
-            <div class="form-group">
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="fas fa-search"></i></div>
+                    <div class="form-group">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-search"></i></div>
+                            </div>
+                            <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Buscar..."/>
+                        </div>
                     </div>
-                    <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" placeholder="Buscar..."/>
-                </div>
-            </div>
- 
+         
 
                 <table id="myTable" class="table table-hover table-bordered table-striped">
                     <thead class="thead-dark thead-max">
@@ -264,12 +264,14 @@
                             <td>Formulario Web</td>
                             <td>Derivado en reclamo <a href="">#33091</a></td>     <!-- Redirige a Detalle Reclamo -->
                         </tr>
-                    </tbody>
-                </table>
-            </form>
-            <footer><hr><center><p >Desarrollado por Grupo © Software 2019- Derechos Reservados</p></center></hr></footer>
-          </div>
+                        </tbody>
+                    </table>
+             </form>
+        </div>
+         
+      
     </template>
+
 
     <template id="informes">
         <div class="main_container informes">
@@ -375,7 +377,7 @@
                  </tbody>   
                 </table>
             </form>
-           <footer><hr><center><p >Desarrollado por Grupo © Software 2019- Derechos Reservados</p></center></hr></footer>
+          
         </div>
 
       </div>
@@ -388,8 +390,15 @@
     <!-- etiqueta que linkea el código vue que se utiliza para esta página -->
     <script src="js/main.js"></script>
     
-     
+ <!-- <footer style="background-color: #5E5C5C; color: white;width: 100%;  " ><hr><right><p >Desarrollado por Grupo © Software 2019- Derechos Reservados</p></right></hr></footer> --> 
+ <footer id="sticky-footer" class="py-4 bg-dark text-white-50" style="margin-top: 50px">
+    <div class="container text-right">
+      <!-- <small>Copyright &copy; Your Website</small> -->
+      <p style="font-size:120%">Desarrollado por Grupo © Software 2019- Derechos Reservados</p>
+    </div>
+  </footer>       
 </body>
+
  
     
 </html>
